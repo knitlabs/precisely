@@ -58,21 +58,6 @@ def initializeData():
 
 initializeData()
 
-<<<<<<< HEAD
-Displacement = pandas.DataFrame.from_records(Disp)
-#Displacement.drop_duplicates(keep=False, inplace=True)
-
-
-x = Displacement.drop(['Genuinity'],axis=1,inplace=False)
-y = Displacement['Genuinity']
-x,y = shuffle(x,y)
-Xtrain,Xtest,yTrain,yTest = train_test_split(x,y,test_size=0.2)
-classifier=svm.SVC(gamma='scale')
-classifier.fit(Xtrain,yTrain)
-PredictedValue = classifier.predict(Xtest)
-confusionMatrix = confusion_matrix(yTest,PredictedValue)
-print(confusionMatrix)
-=======
 def defineClassifier():
     Displacement = pandas.DataFrame.from_records(Disp)
     #Displacement.drop_duplicates(keep=False, inplace=True)
@@ -83,4 +68,3 @@ def defineClassifier():
     classifier=svm.SVC(gamma='scale')
     classifier.fit(Xtrain,yTrain)
     return classifier
->>>>>>> 5e072f2fd0342025e054622f2e84d706f2e757a9
