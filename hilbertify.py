@@ -1,6 +1,7 @@
 import numpy
 import imageio
 
+
 def imageToMatrix(path):
     return imageio.imread(path)
 

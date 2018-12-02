@@ -14,7 +14,7 @@ signatureData = {}
 forgedPath = "sample_Signatures/forged/"
 #colNames =['Displacement','wetherGenuine']
 Disp = []
-
+uID = []
 
 def findDataByUser(userID):
     forged = []
@@ -43,7 +43,6 @@ def vectorToColumns(x, genuinity,user):
 
 
 def initializeData():
-    uID = []
     for file in os.listdir(genuinePath):
         uID.append(file[9:12])
     for user in list(set(uID)):
@@ -51,15 +50,15 @@ def initializeData():
         for i in range(5):
             value = signatureData[user]['genuine'][i][1]
             for values in signatureData[user]['genuine']:
-                x = tuple(numpy.absolute(values[1] - value))
+                x = tuple((values[1] - value))
                 Disp.append(vectorToColumns(x, 1,user))
             for values in signatureData[user]['forged']:
-                x = tuple(numpy.absolute(values[1] - value))
+                x = tuple((values[1] - value))
                 Disp.append(vectorToColumns(x, 0,user))
-
 
 initializeData()
 
+<<<<<<< HEAD
 Displacement = pandas.DataFrame.from_records(Disp)
 #Displacement.drop_duplicates(keep=False, inplace=True)
 
@@ -73,3 +72,15 @@ classifier.fit(Xtrain,yTrain)
 PredictedValue = classifier.predict(Xtest)
 confusionMatrix = confusion_matrix(yTest,PredictedValue)
 print(confusionMatrix)
+=======
+def defineClassifier():
+    Displacement = pandas.DataFrame.from_records(Disp)
+    #Displacement.drop_duplicates(keep=False, inplace=True)
+    x = Displacement.drop(['Genuinity'],axis=1,inplace=False)
+    y = Displacement['Genuinity']
+    x,y = shuffle(x,y)
+    Xtrain,Xtest,yTrain,yTest = train_test_split(x,y,test_size=0.2)
+    classifier=svm.SVC(gamma='scale')
+    classifier.fit(Xtrain,yTrain)
+    return classifier
+>>>>>>> 5e072f2fd0342025e054622f2e84d706f2e757a9
