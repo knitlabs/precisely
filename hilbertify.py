@@ -57,4 +57,5 @@ def meansVector(unrolledImage,imageHeight,imageWidth):
         sum = sum + unrolledImage[i]
         if pos == (pxPerBlock - 1) :
             means[int(i/pxPerBlock)] = sum/pxPerBlock
-    return numpy.array(means)
+    means =  numpy.array(means)
+    return numpy.flatten(means)
